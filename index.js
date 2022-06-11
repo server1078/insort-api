@@ -2,12 +2,20 @@ const PORT = process.env.PORT || 5000
 const express = require('express')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const cors = require('cors')
 
 
 const app = express()
 
+const numbers = ['one','two','three','four','five','six','seven']
 article = []
 
+
+app.use(
+    cors({
+        origin:'*',
+    })
+)
 
 app.get('/',(req,res)=>{
     res.json("hello there this api route must be working now")
@@ -25,8 +33,8 @@ app.get('/headlines',(req,res)=>{
             const url_body = $(element).children('span').first().attr('href')
             const newsUrl = "https://economictimes.indiatimes.com/"+url_body
             const imageUrl = $(element).find('img.lazy').attr('data-original')
-            let count = index
-            article[index] = {title,description,newsUrl,imageUrl,author,count}
+            let count = numbers[index]
+            article[index] = {title,description,newsUrl,imageUrl,count}
         })
         res.json({articles : article.slice(0,7)})
 
@@ -42,11 +50,12 @@ app.get('/business',(req,res)=>{
         
         $("section.list-bottom-story").each((index,element)=>{
             const title = $(element).find('h2').text()
-            const content = $(element).find('.list-bottom-text').text()
+            const description = $(element).find('.list-bottom-text').text()
             const url_body = $(element).find('a').attr('href')
-            const url = "https://www.businessinsider.in/business"+url_body
-            const img_url = $(element).find('img.lazy').attr('data-original')
-            article[index] = {title,content,url,img_url}
+            const newsUrl = "https://www.businessinsider.in/business"+url_body
+            const imageUrl = $(element).find('img.lazy').attr('data-original')
+            let count = numbers[index]
+            article[index] = {title,description,newsUrl,imageUrl,count}
         })
         res.json({articles :article.slice(0,7)})
 
@@ -61,11 +70,12 @@ app.get('/startup',(req,res)=>{
         
         $("section.list-bottom-story").each((index,element)=>{
             const title = $(element).find('h2').text()
-            const content = $(element).find('.list-bottom-text').text()
+            const   description = $(element).find('.list-bottom-text').text()
             const url_body = $(element).find('a').attr('href')
-            const url = "https://www.businessinsider.in/business"+url_body
-            const img_url = $(element).find('img.lazy').attr('data-original')
-            article[index] = {title,content,url,img_url}
+            const newsUrl = "https://www.businessinsider.in/business"+url_body
+            const imageUrl = $(element).find('img.lazy').attr('data-original')
+            let count = numbers[index]
+            article[index] = {title,description,newsUrl,imageUrl,count}
         })
         res.json({articles :article.slice(0,7)})
 
@@ -80,11 +90,13 @@ app.get('/bookSuggestion',(req,res)=>{
         
         $("article.blog-entry").each((index,element)=>{
             const title = $(element).find('img').attr('alt')
-            // const content = null
+            // const description = null
+            const description = ""
             const url_body = $(element).find('a').attr('href')
-            const url = url_body
-            const img_url = $(element).find('img').attr('src')
-            article[index] = {title,url ,img_url}
+            const newsUrl = url_body
+            const imageUrl = $(element).find('img').attr('src')
+            let count = numbers[index]
+            article[index] = {title,description,newsUrl,imageUrl,count}
         })
         res.json({articles :article.slice(0,7)})
 
