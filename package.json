@@ -1,0 +1,17 @@
+{
+  "name": "insort-api",
+  "version": "1.0.0",
+  "description": "api using webscrapping so that i can deploy my insort clone",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon ./index.js"
+  },
+  "author": "Arpit078",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.11",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
