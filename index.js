@@ -21,7 +21,7 @@ app.get('/',(req,res)=>{
     res.json("hello there this api route must be working now")
 })
 
-app.get('/headlines',(req,res)=>{
+app.get('/Headlines',(req,res)=>{
     axios.get(`https://economictimes.indiatimes.com/news/india?from=mdr`)
     .then((response)=>{
         const html = response.data
@@ -42,7 +42,7 @@ app.get('/headlines',(req,res)=>{
     }).catch((err)=> console.log(err))
 })
 
-app.get('/business',(req,res)=>{
+app.get('/Business-News',(req,res)=>{
     axios.get(`https://www.businessinsider.in/business`)
     .then((response)=>{
         const html = response.data
@@ -62,7 +62,7 @@ app.get('/business',(req,res)=>{
 
     }).catch((err)=> console.log(err))
 })
-app.get('/startup',(req,res)=>{
+app.get('/Startup-News',(req,res)=>{
     axios.get(`https://www.businessinsider.in/business/startups`)
     .then((response)=>{
         const html = response.data
@@ -82,7 +82,7 @@ app.get('/startup',(req,res)=>{
 
     }).catch((err)=> console.log(err))
 })
-app.get('/bookSuggestion',(req,res)=>{
+app.get('/Book-Suggestions-Daily',(req,res)=>{
     axios.get(`https://bookfortoday.com/`)
     .then((response)=>{
         const html = response.data
@@ -91,14 +91,14 @@ app.get('/bookSuggestion',(req,res)=>{
         $("article.blog-entry").each((index,element)=>{
             const title = $(element).find('img').attr('alt')
             // const description = null
-            const description = ""
+            const description = null
             const url_body = $(element).find('a').attr('href')
             const newsUrl = url_body
             const imageUrl = $(element).find('img').attr('src')
-            let count = numbers[index]
+            let count = numbers[index]+"book"
             article[index] = {title,description,newsUrl,imageUrl,count}
         })
-        res.json({articles :article.slice(0,7)})
+        res.json({articles :article.slice(0,8)})
 
 
     }).catch((err)=> console.log(err))
