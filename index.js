@@ -9,8 +9,6 @@ const app = express()
 article = []
 
 
-
-
 app.get('/',(req,res)=>{
     res.json("hello there this api route must be working now")
 })
@@ -23,13 +21,14 @@ app.get('/headlines',(req,res)=>{
         
         $(".eachStory").each((index,element)=>{
             const title = $(element).children('h3').first().text()
-            const content = $(element).children('p').first().text()
+            const description = $(element).children('p').first().text()
             const url_body = $(element).children('span').first().attr('href')
-            const url = "https://economictimes.indiatimes.com/"+url_body
-            const img_url = $(element).find('img.lazy').attr('data-original')
-            article[index] = {title,content,url,img_url}
+            const newsUrl = "https://economictimes.indiatimes.com/"+url_body
+            const imageUrl = $(element).find('img.lazy').attr('data-original')
+            let count = index
+            article[index] = {title,description,newsUrl,imageUrl,author,count}
         })
-        res.json(article.slice(0,7))
+        res.json({articles : article.slice(0,7)})
 
 
     }).catch((err)=> console.log(err))
@@ -49,7 +48,7 @@ app.get('/business',(req,res)=>{
             const img_url = $(element).find('img.lazy').attr('data-original')
             article[index] = {title,content,url,img_url}
         })
-        res.json(article.slice(0,7))
+        res.json({articles :article.slice(0,7)})
 
 
     }).catch((err)=> console.log(err))
@@ -68,7 +67,7 @@ app.get('/startup',(req,res)=>{
             const img_url = $(element).find('img.lazy').attr('data-original')
             article[index] = {title,content,url,img_url}
         })
-        res.json(article.slice(0,7))
+        res.json({articles :article.slice(0,7)})
 
 
     }).catch((err)=> console.log(err))
@@ -87,7 +86,7 @@ app.get('/bookSuggestion',(req,res)=>{
             const img_url = $(element).find('img').attr('src')
             article[index] = {title,url ,img_url}
         })
-        res.json(article.slice(0,7))
+        res.json({articles :article.slice(0,7)})
 
 
     }).catch((err)=> console.log(err))
