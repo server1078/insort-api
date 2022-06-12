@@ -1,6 +1,9 @@
 # insort-api
 web-scraping news api made using node js
 
+# deployed on 
+https://insort-api.herokuapp.com
+
 # installation
   1. git clone https://github.com/Arpit078/insort-api.git
   2. cd insort-api
