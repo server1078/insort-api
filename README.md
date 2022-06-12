@@ -16,3 +16,4 @@ there are four routes :
    2. https://insort-api.herokuapp.com/Business
    3. https://insort-api.herokuapp.com/Startup
    4. https://insort-api.herokuapp.com/Finance
+# news collected from : The Economic Times
