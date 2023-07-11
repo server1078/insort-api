@@ -16,7 +16,21 @@ app.use(
         origin:'*',
     })
 )
+const cron = require('node-cron');
 
+const link_to_site = `https://insort-api.onrender.com`
+
+cron.schedule('0 */13 * * * *', () => {
+
+axios.get(link_to_site, { 
+    headers: { "Accept-Encoding": "gzip,deflate,compress" } 
+})
+    .then((req,res) => {console.log(`ok`)})
+    .catch((err)=>{
+    // console.log(err)
+    })
+
+});
 app.get('/',(req,res)=>{
     res.json("hello there this api route must be working now")
 })
